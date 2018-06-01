@@ -4,8 +4,8 @@ Created on Thu May 17 08:12:49 2018
 
 @author: franklin
 """ 
-import time, binheap, sys
-
+import binheap, sys
+'''
 infile=""
 rawdata=open(infile,"r+")
 
@@ -29,13 +29,13 @@ def preProcess(inputfile):
     return jobs
 
 graph = preProcess(lines)
+'''
 
 '''
 print("Input Graph: ")
 print(graph)
 print("\n")
 '''
-start_time = time.time()
 def primNaive(G, numNodes, undirected = True):
     """
     #Function assumes input graph is connected
@@ -66,11 +66,6 @@ def primNaive(G, numNodes, undirected = True):
 
     #print("Processed nodes: %d" %len(processed))
     return cost, MST
-#print(primNaive(graph,nodes)[1])
-print(primNaive(graph,nodes)[0])
-print("--- %s seconds to run for naive---" % (time.time() - start_time))
-
-start_time = time.time()
 
 def primBin(G, numNodes, undirected = True):
     toprocess = binheap.BinHeap()
@@ -127,7 +122,7 @@ def primBin(G, numNodes, undirected = True):
                 print("Old cost: %d" %graphDict[edge[1]])
                 print("New cost: %d" %edge[2])
                 '''
-                #graphDict[edge[1]] = edge[2]
+
                 graphDict[edge[1]][0] = edge[2]
                 graphDict[edge[1]][1] = edge[0]
         #print("edges updated")
@@ -146,8 +141,3 @@ def primBin(G, numNodes, undirected = True):
         MST.append([sourceNode,mostRecentAdd,addEdge[0]])
 
     return cost, MST
-
-#print(primBin(graph,nodes)[1])
-print(primBin(graph,nodes)[0])
-print("--- %s seconds to run for heap implementation---" % (time.time() - start_time))
-#way faster even with the inelegant heap key updates
